@@ -144,8 +144,9 @@ export default class TORNetworks extends EventEmitter{
 			this.#networksProcesses.delete(socksPort);
 			this.#list = this.#list.filter(inEx => inEx.internal !== network.internalAddress);
 			this.emit('networkExit', network, code.toString());
-      if (process.env.TNL_USAGE === 'CLI' && this.#cliOpts.pid) {
-        removePidFile(pidFiles.get(networkProcess.toString()));
+      if (process.env.TNL_USAGE === 'CLI') {
+        if (this.#cliOpts.pid) removePidFile(pidFiles.get(networkProcess.toString()));
+        removeFromOutput(network);
       }
       debug(`Closing network: %o. Child process exited with code %s.`, network, code);
 		});
@@ -170,6 +171,12 @@ export default class TORNetworks extends EventEmitter{
 
 function addToOutput(network) {
   fs.appendFileSync(output, JSON.stringify(network) + '\n');
+}
+
+function removeFromOutput(network) {
+  const search = JSON.stringify(network) + '\n';
+  if (!fs.existsSync(output)) return;
+  fs.writeFileSync(output, fs.readFileSync(output).toString().replace(search, ''));
 }
 
 function writePidFile(pid, filePath) {
