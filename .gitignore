@@ -12,6 +12,7 @@ dump.rdb
 temp/*
 !temp/.gitkeep
 ncp-debug.log
+package-lock.json
 
 
 # Runtime data #
