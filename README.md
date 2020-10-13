@@ -16,7 +16,7 @@ npm i tor-network-launcher -g
 
 type `tnl --help` to see all options
 ```sh
-tnl --instances 3
+tnl --instances 3 --silent --output /temp/torNetworks.txt
 ```
 
 *Code*:

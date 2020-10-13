@@ -18,9 +18,9 @@ program
   .description('TOR Network Launcher')
   .option('-s --silent', 'hide all messages from all netowrks', false)
   .option('-i --instances <number>', 'launch [number] networks', 1)
+  .option('-o --output <path>', 'specify networks file')
   /*
   // TODO:
-  .option('-o --output <path>', 'specify log file for stdout')
   .option('-e --error <path>', 'specify log file for stderr')
   .option('-l --log [path]', 'specify log file which gathers both stdout and stderr')
   .option('--log-type <type>', 'specify log output style (raw by default, json optional)')

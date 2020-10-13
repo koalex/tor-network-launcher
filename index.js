@@ -18,6 +18,7 @@ const defaultProps = {
 };
 
 let pidFiles = new Map();
+let output;
 
 export default class TORNetworks extends EventEmitter{
   #cliOpts = {};
@@ -120,10 +121,16 @@ export default class TORNetworks extends EventEmitter{
 			if (data.toString().toLowerCase().includes('bootstrapped 100%')) {
 				this.#list.push(network);
 				this.emit('network', network);
-        if (process.env.TNL_USAGE === 'CLI') {
-          console.log(`Network launched: ${JSON.stringify(network)}`);
-        }
         debug('Network launched: %o', network);
+        if (process.env.TNL_USAGE === 'CLI') {
+          if (this.#cliOpts.output) {
+            output = this.#cliOpts.output;
+            addToOutput(network);
+          }
+          if (!this.silent) {
+            console.log(`Network launched: ${JSON.stringify(network)}`);
+          }
+        }
 			}
 		});
 		networkProcess.stderr.on('data', data => {
@@ -161,6 +168,10 @@ export default class TORNetworks extends EventEmitter{
   }
 }
 
+function addToOutput(network) {
+  fs.appendFileSync(output, JSON.stringify(network) + '\n');
+}
+
 function writePidFile(pid, filePath) {
   fs.appendFileSync(filePath, pid.toString());
   pidFiles.set(pid.toString(), filePath);
@@ -182,7 +193,10 @@ function onSigintSigterm() {
 
 function onProcessExit() {
   rimraf.sync(basePath + '/tor*'); // Remove TOR data
-  if (process.env.TNL_USAGE === 'CLI') removePidFile();
+  if (process.env.TNL_USAGE === 'CLI') {
+    removePidFile();
+    rimraf.sync(output);
+  }
 }
 
 function randomPort(min, max) {
