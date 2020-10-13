@@ -1,0 +1,43 @@
+{
+  "name": "tor-network-launcher",
+  "version": "0.9.0",
+  "description": "TOR networks launcher.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "tnl": "./bin/tnl.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koalex/tor-network-launcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/koalex/tor-network-launcher/issues"
+  },
+  "keywords": [
+    "tor",
+    "proxy",
+    "cli"
+  ],
+  "author": {
+    "name": "Konstantin Aleksandrov",
+    "email": "alexandrovkm@gmail.com",
+    "url": "https://github.com/koalex"
+  },
+  "homepage": "https://github.com/koalex/tor-network-launcher#readme",
+  "license": "SEE LICENSE IN LICENSE file",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "commander": "^6.1.0",
+    "cross-env": "^6.0.3",
+    "debug": "^4.1.1",
+    "portscanner": "^2.2.0",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {}
+}
