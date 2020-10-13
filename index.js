@@ -120,6 +120,9 @@ export default class TORNetworks extends EventEmitter{
 			if (data.toString().toLowerCase().includes('bootstrapped 100%')) {
 				this.#list.push(network);
 				this.emit('network', network);
+        if (process.env.TNL_USAGE === 'CLI') {
+          console.log(`Network launched: ${network}`);
+        }
         debug('Network launched: %o', network);
 			}
 		});
