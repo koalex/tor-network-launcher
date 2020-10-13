@@ -121,7 +121,7 @@ export default class TORNetworks extends EventEmitter{
 				this.#list.push(network);
 				this.emit('network', network);
         if (process.env.TNL_USAGE === 'CLI') {
-          console.log(`Network launched: ${network}`);
+          console.log(`Network launched: ${JSON.stringify(network)}`);
         }
         debug('Network launched: %o', network);
 			}
