@@ -1,6 +1,6 @@
 {
   "name": "tor-network-launcher",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "TOR networks launcher.",
   "main": "index.js",
   "type": "module",
